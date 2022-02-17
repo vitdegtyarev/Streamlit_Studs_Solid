@@ -37,12 +37,12 @@ RF_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_RF_LWC.pkl'),'
 k_red_NWC_RF=0.94
 k_red_LWC_RF=1.00
 
-KNN_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_KNN_NWC.joblib'))
-KNN_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_KNN_NWC.pkl'),'rb'))
-KNN_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_KNN_LWC.joblib'))
-KNN_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_KNN_LWC.pkl'),'rb'))
-k_red_NWC_KNN=0.89
-k_red_LWC_KNN=0.96
+#KNN_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_KNN_NWC.joblib'))
+#KNN_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_KNN_NWC.pkl'),'rb'))
+#KNN_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_KNN_LWC.joblib'))
+#KNN_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_KNN_LWC.pkl'),'rb'))
+#k_red_NWC_KNN=0.89
+#k_red_LWC_KNN=0.96
 
 CatBoost_NWC=joblib.load(os.path.join(ROOT_DIR,'Stud_Solid_CatBoost_NWC.joblib'))
 CatBoost_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Stud_Solid_CatBoost_NWC.pkl'),'rb'))
@@ -51,12 +51,12 @@ CatBoost_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Stud_Solid_CatBoost_
 k_red_NWC_CatBoost=1.00
 k_red_LWC_CatBoost=1.00
 
-DT_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_DT_NWC.joblib'))
-DT_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_DT_NWC.pkl'),'rb'))
-DT_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_DT_LWC.joblib'))
-DT_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_DT_LWC.pkl'),'rb'))
-k_red_NWC_DT=0.75
-k_red_LWC_DT=0.95
+#DT_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_DT_NWC.joblib'))
+#DT_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_DT_NWC.pkl'),'rb'))
+#DT_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_DT_LWC.joblib'))
+#DT_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_DT_LWC.pkl'),'rb'))
+#k_red_NWC_DT=0.75
+#k_red_LWC_DT=0.95
 
 st.header('Shear Resistance of Headed Studs in Solid Concrete Slabs Predicted by Machine Learning Models')
 
