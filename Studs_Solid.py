@@ -7,6 +7,7 @@ import numpy as np
 import math
 import os
 from config.definitions import ROOT_DIR
+from PIL import Image
 
 #Load models and scalers
 GBR_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_GBR_NWC.joblib'))
@@ -16,13 +17,6 @@ GBR_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_GBR_LWC.pkl')
 k_red_NWC_GBR=0.97
 k_red_LWC_GBR=0.98
 
-XGBoost_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_XGBoost_NWC.joblib'))
-XGBoost_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_XGBoost_NWC.pkl'),'rb'))
-XGBoost_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_XGBoost_LWC.joblib'))
-XGBoost_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_XGBoost_LWC.pkl'),'rb'))
-k_red_NWC_XGBoost=0.89
-k_red_LWC_XGBoost=0.99
-
 LightGBM_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_LightGBM_NWC.joblib'))
 LightGBM_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_LightGBM_NWC.pkl'),'rb'))
 LightGBM_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_LightGBM_LWC.joblib'))
@@ -30,33 +24,12 @@ LightGBM_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_LightGBM
 k_red_NWC_LightGBM=0.96
 k_red_LWC_LightGBM=1.00
 
-RF_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_RF_NWC.joblib'))
-RF_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_RF_NWC.pkl'),'rb'))
-RF_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_RF_LWC.joblib'))
-RF_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_RF_LWC.pkl'),'rb'))
-k_red_NWC_RF=0.94
-k_red_LWC_RF=1.00
-
-#KNN_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_KNN_NWC.joblib'))
-#KNN_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_KNN_NWC.pkl'),'rb'))
-#KNN_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_KNN_LWC.joblib'))
-#KNN_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_KNN_LWC.pkl'),'rb'))
-#k_red_NWC_KNN=0.89
-#k_red_LWC_KNN=0.96
-
 CatBoost_NWC=joblib.load(os.path.join(ROOT_DIR,'Stud_Solid_CatBoost_NWC.joblib'))
 CatBoost_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Stud_Solid_CatBoost_NWC.pkl'),'rb'))
 CatBoost_LWC=joblib.load(os.path.join(ROOT_DIR,'Stud_Solid_CatBoost_LWC.joblib'))
 CatBoost_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Stud_Solid_CatBoost_LWC.pkl'),'rb'))
 k_red_NWC_CatBoost=1.00
 k_red_LWC_CatBoost=1.00
-
-#DT_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_DT_NWC.joblib'))
-#DT_scaler_NWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_DT_NWC.pkl'),'rb'))
-#DT_LWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_DT_LWC.joblib'))
-#DT_scaler_LWC=pickle.load(open(os.path.join(ROOT_DIR,'Studs_Solid_DT_LWC.pkl'),'rb'))
-#k_red_NWC_DT=0.75
-#k_red_LWC_DT=0.95
 
 st.header('Shear Resistance of Headed Studs in Solid Concrete Slabs Predicted by Machine Learning Models')
 
@@ -121,73 +94,56 @@ X_ML=np.array([[fcm,fu,d,ddo,hw,h]])
 
 if Concrete_Type=='Normal weight':
     X_ML_GBR=GBR_scaler_NWC.transform(X_ML)
-    X_ML_XGBoost=XGBoost_scaler_NWC.transform(X_ML)
     X_ML_LightGBM=LightGBM_scaler_NWC.transform(X_ML)
-    X_ML_RF=RF_scaler_NWC.transform(X_ML)
-    #X_ML_KNN=KNN_scaler_NWC.transform(X_ML)
     X_ML_CatBoost=CatBoost_scaler_NWC.transform(X_ML)
-    #X_ML_DT=DT_scaler_NWC.transform(X_ML)
 
     Pn_GBR=GBR_NWC.predict(X_ML_GBR).item()
-    Pn_XGBoost=XGBoost_NWC.predict(X_ML_XGBoost).item()
     Pn_LightGBM=LightGBM_NWC.predict(X_ML_LightGBM).item()
-    Pn_RF=RF_NWC.predict(X_ML_RF).item()
-    #Pn_KNN=KNN_NWC.predict(X_ML_KNN).item()
     Pn_CatBoost=CatBoost_NWC.predict(X_ML_CatBoost).item()
-    #Pn_DT=DT_NWC.predict(X_ML_DT).item()
 
     Pd_GBR=k_red_NWC_GBR*Pn_GBR/1.25
-    Pd_XGBoost=k_red_NWC_XGBoost*Pn_XGBoost/1.25
     Pd_LightGBM=k_red_NWC_LightGBM*Pn_LightGBM/1.25
-    Pd_RF=k_red_NWC_RF*Pn_RF/1.25
-    #Pd_KNN=k_red_NWC_KNN*Pn_KNN/1.25
     Pd_CatBoost=k_red_NWC_CatBoost*Pn_CatBoost/1.25
-    #Pd_DT=k_red_NWC_DT*Pn_DT/1.25
 elif Concrete_Type=='Lightweight':
     X_ML_GBR=GBR_scaler_LWC.transform(X_ML)
-    X_ML_XGBoost=XGBoost_scaler_LWC.transform(X_ML)
     X_ML_LightGBM=LightGBM_scaler_LWC.transform(X_ML)
-    X_ML_RF=RF_scaler_LWC.transform(X_ML)
-    #X_ML_KNN=KNN_scaler_LWC.transform(X_ML)
     X_ML_CatBoost=CatBoost_scaler_LWC.transform(X_ML)
-    #X_ML_DT=DT_scaler_LWC.transform(X_ML)
 
     Pn_GBR=GBR_LWC.predict(X_ML_GBR).item()
-    Pn_XGBoost=XGBoost_LWC.predict(X_ML_XGBoost).item()
     Pn_LightGBM=LightGBM_LWC.predict(X_ML_LightGBM).item()
-    Pn_RF=RF_LWC.predict(X_ML_RF).item()
-    #Pn_KNN=KNN_LWC.predict(X_ML_KNN).item()
     Pn_CatBoost=CatBoost_LWC.predict(X_ML_CatBoost).item()
-    #Pn_DT=DT_LWC.predict(X_ML_DT).item()
 
     Pd_GBR=k_red_LWC_GBR*Pn_GBR/1.25
-    Pd_XGBoost=k_red_LWC_XGBoost*Pn_XGBoost/1.25
     Pd_LightGBM=k_red_LWC_LightGBM*Pn_LightGBM/1.25
-    Pd_RF=k_red_LWC_RF*Pn_RF/1.25
-    #Pd_KNN=k_red_LWC_KNN*Pn_KNN/1.25
     Pd_CatBoost=k_red_LWC_CatBoost*Pn_CatBoost/1.25
-    #Pd_DT=k_red_LWC_DT*Pn_DT/1.25
 
 st.subheader('Nominal Shear Resistance, Pn (kN)')
 Pn={'GBR': "{:.1f}".format(Pn_GBR),
-    'XGBoost': "{:.1f}".format(Pn_XGBoost),
     'LightGBM': "{:.1f}".format(Pn_LightGBM),
-    'RF': "{:.1f}".format(Pn_RF),
-    #'KNN': "{:.1f}".format(Pn_KNN),
     'CatBoost': "{:.1f}".format(Pn_CatBoost),
-    #'DT': "{:.1f}".format(Pn_DT)
 	}
 Pn_df=pd.DataFrame(Pn, index=[0])
 st.dataframe(Pn_df)
 
 st.subheader('Design Shear Resistance, Pd (kN)')
 Pd={'GBR': "{:.1f}".format(Pd_GBR),
-    'XGBoost': "{:.1f}".format(Pd_XGBoost),
     'LightGBM': "{:.1f}".format(Pd_LightGBM),
-    'RF': "{:.1f}".format(Pd_RF),
-    #'KNN': "{:.1f}".format(Pd_KNN),
     'CatBoost': "{:.1f}".format(Pd_CatBoost),
-    #'DT': "{:.1f}".format(Pd_DT)
 	}
 Pd_df=pd.DataFrame(Pd, index=[0])
 st.dataframe(Pd_df)
+
+image = Image.open(os.path.join(ROOT_DIR,'Stud.png'))
+st.subheader('Dimensional Parameters of Studs')
+st.image(image)
+
+st.subheader('Nomenclature')
+st.write('fcm is the mean compressive strength of concrete; fu is the tensile strength of stud; d is the stud diameter; h is the stud height; ddo is the weld colar diameter; hw is the weld colar height; GBR is gradient boosting regressor; LightGBM is light gradient boosting machine; CatBoost is gradient boosting with categorical features support.')
+
+st.subheader('Reference')
+st.write('Degtyarev, V.V., Hicks, S.J., Reliability-based design shear resistance of headed studs in solid slabs predicted by machine learning models')
+#st.markdown('[engrXiv](https://doi.org/10.31224/osf.io/mezar)', unsafe_allow_html=True)
+#st.markdown('[ResearchGate](https://www.researchgate.net/publication/356756613_Buckling_and_ultimate_load_prediction_models_for_perforated_steel_beams_using_machine_learning_algorithms)', unsafe_allow_html=True)
+
+st.subheader('Source code')
+st.markdown('[GitHub](https://github.com/vitdegtyarev/Streamlit_Studs_Solid)', unsafe_allow_html=True)
