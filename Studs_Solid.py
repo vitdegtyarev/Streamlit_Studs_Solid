@@ -9,7 +9,6 @@ import os
 from config.definitions import ROOT_DIR
 from PIL import Image
 import matplotlib.pyplot as plt
-from fractions import Fraction
 
 #Load models and scalers
 GBR_NWC=joblib.load(os.path.join(ROOT_DIR,'Studs_Solid_GBR_NWC.joblib'))
@@ -181,7 +180,7 @@ if design_practice=='Europe':
     st.image(image)
 
     st.subheader('Nomenclature')
-    st.write('NW and LW stand for normal weight and lightweight concrete, respectively; fcm is the mean compressive cylinder strength of the concrete at 28-days; fck=fcm-8 MPa is the characteristic compressive cylinder strength of the concrete; fu is the tensile strength of stud; d is the stud diameter; h is the height of the stud after welding; ddo is the weld collar diameter according to ISO 13918; hw is the weld collar height according to ISO 13918; GBR is gradient boosting regressor; LightGBM is light gradient boosting machine; CatBoost is gradient boosting with categorical features support.')
+    st.write('NW and LW stand for normal weight and lightweight concrete, respectively; fcm is the mean compressive cylinder strength of the concrete at 28-days; fck is the characteristic compressive cylinder strength of the concrete determined according to EN 1992-1-1 (Eurocode 2); fu is the tensile strength of stud; d is the stud diameter; h is the height of the stud after welding; ddo is the weld collar diameter according to ISO 13918; hw is the weld collar height according to ISO 13918; GBR is gradient boosting regressor; LightGBM is light gradient boosting machine; CatBoost is gradient boosting with categorical features support.')
 
     st.subheader('Stud Resistance Plots as Functions of Design Variables')
 
@@ -417,9 +416,9 @@ if design_practice=='Europe':
     f1 = plt.figure(figsize=(6.75,4), dpi=200)
 
     ax1 = f1.add_subplot(2,2,1)
-    ax1.plot(fcm1, Pn_GBR_1, color='#e31a1c',linewidth=1.5, label='GBR Nominal',linestyle='solid')
-    ax1.plot(fcm1, Pn_LightGBM_1, color='#0070C0',linewidth=1.5, label='LightGBM Nominal',linestyle='solid')
-    ax1.plot(fcm1, Pn_CatBoost_1, color='#00B050',linewidth=1.5, label='CatBoost Nominal',linestyle='solid')
+    ax1.plot(fcm1, Pn_GBR_1, color='#e31a1c',linewidth=1.5, label='GBR-N',linestyle='solid')
+    ax1.plot(fcm1, Pn_LightGBM_1, color='#0070C0',linewidth=1.5, label='LightGBM-N',linestyle='solid')
+    ax1.plot(fcm1, Pn_CatBoost_1, color='#00B050',linewidth=1.5, label='CatBoost-N',linestyle='solid')
     fcm_loc=np.where(fcm1==fcm)[0].item()
     ax1.scatter(fcm,Pn_GBR_1[fcm_loc],marker='o',facecolors='#e31a1c')
     ax1.scatter(fcm,Pn_LightGBM_1[fcm_loc],marker='o',facecolors='#0070C0')
@@ -467,13 +466,13 @@ if design_practice=='Europe':
     f1.legend(ncol=3, fontsize=10, bbox_to_anchor=(0.52, -0.07), loc='lower center')
     f1.tight_layout()
     st.pyplot(f1)
-
+    
     f2 = plt.figure(figsize=(6.75,4), dpi=200)
 
     ax1 = f2.add_subplot(2,2,1)
-    ax1.plot(fck1, Pd_GBR_1, color='#e31a1c',linewidth=1.5, label='GBR Design',linestyle='solid')
-    ax1.plot(fck1, Pd_LightGBM_1, color='#0070C0',linewidth=1.5, label='LightGBM Design',linestyle='solid')
-    ax1.plot(fck1, Pd_CatBoost_1, color='#00B050',linewidth=1.5, label='CatBoost Design',linestyle='solid')
+    ax1.plot(fck1, Pd_GBR_1, color='#e31a1c',linewidth=1.5, label='GBR-D',linestyle='solid')
+    ax1.plot(fck1, Pd_LightGBM_1, color='#0070C0',linewidth=1.5, label='LightGBM-D',linestyle='solid')
+    ax1.plot(fck1, Pd_CatBoost_1, color='#00B050',linewidth=1.5, label='CatBoost-D',linestyle='solid')
     fck_loc=np.where(fck1==fck)[0].item()
     ax1.scatter(fck,Pd_GBR_1[fck_loc],marker='o',facecolors='#e31a1c')
     ax1.scatter(fck,Pd_LightGBM_1[fck_loc],marker='o',facecolors='#0070C0')
@@ -959,14 +958,14 @@ else:
         Pd_LightGBM_3_4_kips=Pd_LightGBM_3_4*0.2248
         Pd_LightGBM_4_4_kips=Pd_LightGBM_4_4*0.2248
         Pd_CatBoost_3_4_kips=Pd_CatBoost_3_4*0.2248
-        Pd_CatBoost_4_4_kips=Pd_CatBoost_4_4*0.2248        
-
+        Pd_CatBoost_4_4_kips=Pd_CatBoost_4_4*0.2248   
+        
     f1 = plt.figure(figsize=(6.75,4), dpi=200)
 
     ax1 = f1.add_subplot(2,2,1)
-    ax1.plot(fprc_psi1, Pn_GBR_1_kips, color='#e31a1c',linewidth=1.5, label='GBR Nominal',linestyle='solid')
-    ax1.plot(fprc_psi1, Pn_LightGBM_1_kips, color='#0070C0',linewidth=1.5, label='LightGBM Nominal',linestyle='solid')
-    ax1.plot(fprc_psi1, Pn_CatBoost_1_kips, color='#00B050',linewidth=1.5, label='CatBoost Nominal',linestyle='solid')
+    ax1.plot(fprc_psi1, Pn_GBR_1_kips, color='#e31a1c',linewidth=1.5, label='GBR-N',linestyle='solid')
+    ax1.plot(fprc_psi1, Pn_LightGBM_1_kips, color='#0070C0',linewidth=1.5, label='LightGBM-N',linestyle='solid')
+    ax1.plot(fprc_psi1, Pn_CatBoost_1_kips, color='#00B050',linewidth=1.5, label='CatBoost-N',linestyle='solid')
     fprc_psi1_loc=np.where(fprc_psi1==fprc_psi)[0].item()
     ax1.scatter(fprc_psi,Pn_GBR_1_kips[fprc_psi1_loc],marker='o',facecolors='#e31a1c')
     ax1.scatter(fprc_psi,Pn_LightGBM_1_kips[fprc_psi1_loc],marker='o',facecolors='#0070C0')
@@ -1014,13 +1013,13 @@ else:
     f1.legend(ncol=3, fontsize=10, bbox_to_anchor=(0.52, -0.07), loc='lower center')
     f1.tight_layout()
     st.pyplot(f1)
-
+    
     f2 = plt.figure(figsize=(6.75,4), dpi=200)
 
     ax1 = f2.add_subplot(2,2,1)
-    ax1.plot(fprc_psi1, Pd_GBR_3_1_kips, color='#e31a1c',linewidth=1.5, label='GBR Design',linestyle='solid')
-    ax1.plot(fprc_psi1, Pd_LightGBM_3_1_kips, color='#0070C0',linewidth=1.5, label='LightGBM Design',linestyle='solid')
-    ax1.plot(fprc_psi1, Pd_CatBoost_3_1_kips, color='#00B050',linewidth=1.5, label='CatBoost Design',linestyle='solid')
+    ax1.plot(fprc_psi1, Pd_GBR_3_1_kips, color='#e31a1c',linewidth=1.5, label='GBR-D',linestyle='solid')
+    ax1.plot(fprc_psi1, Pd_LightGBM_3_1_kips, color='#0070C0',linewidth=1.5, label='LightGBM-D',linestyle='solid')
+    ax1.plot(fprc_psi1, Pd_CatBoost_3_1_kips, color='#00B050',linewidth=1.5, label='CatBoost-D',linestyle='solid')
     fprc_psi1_loc=np.where(fprc_psi1==fprc_psi)[0].item()
     ax1.scatter(fprc_psi,Pd_GBR_3_1_kips[fprc_psi1_loc],marker='o',facecolors='#e31a1c')
     ax1.scatter(fprc_psi,Pd_LightGBM_3_1_kips[fprc_psi1_loc],marker='o',facecolors='#0070C0')
@@ -1072,9 +1071,9 @@ else:
     f3 = plt.figure(figsize=(6.75,4), dpi=200)
 
     ax1 = f3.add_subplot(2,2,1)
-    ax1.plot(fprc_psi1, Pd_GBR_4_1_kips, color='#e31a1c',linewidth=1.5, label='GBR Design',linestyle='solid')
-    ax1.plot(fprc_psi1, Pd_LightGBM_4_1_kips, color='#0070C0',linewidth=1.5, label='LightGBM Design',linestyle='solid')
-    ax1.plot(fprc_psi1, Pd_CatBoost_4_1_kips, color='#00B050',linewidth=1.5, label='CatBoost Design',linestyle='solid')
+    ax1.plot(fprc_psi1, Pd_GBR_4_1_kips, color='#e31a1c',linewidth=1.5, label='GBR-D',linestyle='solid')
+    ax1.plot(fprc_psi1, Pd_LightGBM_4_1_kips, color='#0070C0',linewidth=1.5, label='LightGBM-D',linestyle='solid')
+    ax1.plot(fprc_psi1, Pd_CatBoost_4_1_kips, color='#00B050',linewidth=1.5, label='CatBoost-D',linestyle='solid')
     fprc_psi1_loc=np.where(fprc_psi1==fprc_psi)[0].item()
     ax1.scatter(fprc_psi,Pd_GBR_4_1_kips[fprc_psi1_loc],marker='o',facecolors='#e31a1c')
     ax1.scatter(fprc_psi,Pd_LightGBM_4_1_kips[fprc_psi1_loc],marker='o',facecolors='#0070C0')
