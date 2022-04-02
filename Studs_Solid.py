@@ -1126,9 +1126,9 @@ else:
 
 
 st.subheader('Reference')
-st.write('Degtyarev, V.V., Hicks, S.J., Reliability-based design shear resistance of headed studs in solid slabs predicted by machine learning models')
-#st.markdown('[engrXiv](https://doi.org/10.31224/osf.io/mezar)', unsafe_allow_html=True)
-#st.markdown('[ResearchGate](https://www.researchgate.net/publication/356756613_Buckling_and_ultimate_load_prediction_models_for_perforated_steel_beams_using_machine_learning_algorithms)', unsafe_allow_html=True)
+st.write('Degtyarev, V.V., Hicks, S.J., Reliability-based design shear resistance of headed studs in solid slabs predicted by machine learning models, engrXiv, 2022')
+st.markdown('[engrXiv](https://doi.org/10.31224/2244)', unsafe_allow_html=True)
+st.markdown('[ResearchGate](https://www.researchgate.net/publication/359676490_Reliability-based_design_shear_resistance_of_headed_studs_in_solid_slabs_predicted_by_machine_learning_models)', unsafe_allow_html=True)
 
 st.subheader('Source code')
 st.markdown('[GitHub](https://github.com/vitdegtyarev/Streamlit_Studs_Solid)', unsafe_allow_html=True)
