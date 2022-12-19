@@ -1127,7 +1127,6 @@ else:
 
 st.subheader('Reference')
 st.write('Degtyarev, V.V., Hicks, S.J., Reliability-based design shear resistance of headed studs in solid slabs predicted by machine learning models, Architecture, Structures and Construction, 2022, https://doi.org/10.1007/s44150-022-00078-1')
-st.markdown('[Published paper](https://doi.org/10.1007/s44150-022-00078-1)', unsafe_allow_html=True)
 st.markdown('[ResearchGate](https://www.researchgate.net/publication/366412207_Reliability-based_design_shear_resistance_of_headed_studs_in_solid_slabs_predicted_by_machine_learning_models)', unsafe_allow_html=True)
 
 st.subheader('Source code')
